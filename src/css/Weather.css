@@ -1,0 +1,1243 @@
+/* ==========================================================================
+   🌦 Smart Crop Weather & Advisory — Final Polished Weather.css
+   ========================================================================== */
+
+/* ================================
+   Global Layout
+   ================================ */
+.weather-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  scroll-behavior: smooth;
+  background-color: #031405;
+}
+
+/* Overlay dark layer */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 15, 5, 0.2) 0%,
+    rgba(0, 5, 2, 0.75) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ================================
+   Background Video
+   ================================ */
+.background-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.55) contrast(1.05) saturate(0.95);
+  transition: opacity 1.2s ease-in-out;
+}
+
+/* ================================
+   Main Content Layout
+   ================================ */
+.weather-content {
+  position: relative;
+  z-index: 10;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.header-subtitle {
+  color: #cfffdb;
+  max-width: 600px;
+  margin: 8px auto 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* ================================
+   Title
+   ================================ */
+.title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.5px;
+  background: linear-gradient(120deg, #ffffff 40%, #00ffaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================================
+   Search Bar
+   ================================ */
+.search-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 520px;
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: 0.1s;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-bar input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(0, 255, 170, 0.6);
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.25);
+}
+
+.search-bar button {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 110px;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 8px 24px rgba(0, 180, 216, 0.25);
+}
+
+.search-bar button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0077b6, #00b4d8);
+  box-shadow: 0 12px 30px rgba(0, 180, 216, 0.45);
+}
+
+.search-bar button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Controls block (Soil select and banners) */
+.controls-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: 0.15s;
+}
+
+.select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.select-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #afffaf;
+}
+
+.soil-select {
+  background: rgba(0, 0, 0, 0.45);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.soil-select:focus {
+  border-color: #00ffaa;
+  box-shadow: 0 0 10px rgba(0, 255, 170, 0.25);
+}
+
+.info-banner {
+  background: rgba(0, 255, 120, 0.12);
+  border: 1px solid rgba(0, 255, 120, 0.3);
+  color: #e2ffe8;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 255, 120, 0.05);
+  backdrop-filter: blur(8px);
+  animation: softBreathe 3s infinite alternate;
+}
+
+@keyframes softBreathe {
+  from { box-shadow: 0 0 10px rgba(0, 255, 120, 0.05); }
+  to { box-shadow: 0 0 20px rgba(0, 255, 120, 0.25); }
+}
+
+/* ================================
+   5km Radius Info Banner
+   ================================ */
+.radius-info-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(0, 255, 170, 0.08);
+  border: 1px solid rgba(0, 255, 170, 0.25);
+  color: #d2ffe0;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 255, 120, 0.08);
+  backdrop-filter: blur(8px);
+  max-width: 780px;
+  width: 90%;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: 0.2s;
+}
+
+.radius-info-banner code {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: bold;
+  color: #00ffaa;
+  margin-left: 4px;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00ffaa;
+  box-shadow: 0 0 10px #00ffaa;
+  animation: pulseDot 1.5s infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(0, 255, 170, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(0, 255, 170, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(0, 255, 170, 0);
+  }
+}
+
+/* ================================
+   Main Dashboard Layout (Three-Column / Responsive)
+   ================================ */
+.main-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 1400px;
+  align-items: flex-start;
+  justify-content: center;
+  animation: fadeInUp 0.9s ease both;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 2rem;
+  flex: 1 1 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+.left-panel .weather-card,
+.left-panel .map-card {
+  flex: 1;
+  margin: 0;
+}
+
+/* Glassmorphism Cards Base */
+.weather-card, .agri-card, .crop-detail-card, .map-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  padding: 1.8rem;
+  text-align: left;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.weather-card:hover, .map-card:hover, .agri-card:hover, .crop-detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(0, 255, 170, 0.15), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.weather-card h2, .map-card h2, .agri-card h2, .crop-detail-card h2 {
+  color: #b0ffb9;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+
+/* ================================
+   Local Weather Station Card
+   ================================ */
+.temp-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.temp {
+  font-size: 4.5rem;
+  font-weight: 800;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  color: #eaffea;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.weather-season-badge {
+  background: rgba(0, 255, 170, 0.12);
+  border: 1px solid rgba(0, 255, 170, 0.3);
+  color: #00ffaa;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Weather Stats Grid */
+.weather-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 1.2rem;
+}
+
+.stat-block {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.25s ease;
+}
+
+.stat-block:hover {
+  background: rgba(0, 255, 170, 0.05);
+  border-color: rgba(0, 255, 170, 0.2);
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #afffaf;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 2px;
+}
+
+/* ================================
+   Map Card Specifics
+   ================================ */
+.map-container {
+  height: 230px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0, 255, 120, 0.25);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* Customize Leaflet elements to fit dark theme */
+.leaflet-container {
+  background: #011406 !important;
+}
+
+.coords-display {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #a4ffd5;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* ================================
+   Recommended Crops Card (Middle Panel)
+   ================================ */
+.agri-card {
+  flex: 1 1 450px;
+  max-width: 580px;
+  width: 100%;
+}
+
+.grid-helper {
+  display: block;
+  font-size: 0.8rem;
+  color: #c8ffd0;
+  opacity: 0.8;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Crop Grid */
+.crop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.crop-item {
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.crop-item img {
+  width: 100%;
+  height: 76px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.crop-item p {
+  margin-top: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #eaffea;
+  margin-bottom: 0;
+}
+
+.crop-item:hover {
+  transform: scale(1.06);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 255, 170, 0.2);
+}
+
+.crop-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Active Highlight for crop selection */
+.crop-item.active-crop {
+  border-color: #00ffaa;
+  background: rgba(0, 255, 120, 0.08);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 120, 0.3);
+}
+
+.crop-item.active-crop p {
+  color: #00ffaa;
+}
+
+/* AI Tips & Advisory */
+.agri-tips {
+  background: rgba(0, 0, 0, 0.35);
+  border-left: 4px solid #00ffbb;
+  border-radius: 0 12px 12px 0;
+  padding: 14px;
+  text-align: left;
+  margin-top: 1.5rem;
+}
+
+.agri-tips strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #00ffaa;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.agri-tips p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e2fbe3;
+  margin: 0;
+}
+
+/* ================================
+   Crop Cultivation Playbook Card (Right Panel)
+   ================================ */
+.crop-detail-card {
+  flex: 1.2 1 550px;
+  max-width: 780px;
+  width: 100%;
+}
+
+.detail-item.desc {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border-left: 3px solid #00b4d8;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item.desc p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e3f8ff;
+  margin: 0;
+}
+
+/* Crop Requirement Stats Grid */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.detail-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.25s ease;
+}
+
+.detail-box:hover {
+  background: rgba(0, 255, 120, 0.06);
+  border-color: rgba(0, 255, 120, 0.25);
+  transform: translateY(-2px);
+}
+
+.detail-box .icon {
+  font-size: 1.6rem;
+  background: rgba(0, 0, 0, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.detail-box .text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.detail-box .label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #a6ffc2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-box .value {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 2px;
+}
+
+.detail-item.tips {
+  background: rgba(0, 255, 120, 0.05);
+  border: 1px solid rgba(0, 255, 120, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(0, 255, 120, 0.04);
+}
+
+.detail-item.tips strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #00ffaa;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-item.tips p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #eaffe8;
+  margin: 0;
+}
+
+/* ================================
+   Back Home & Theme Toggle Buttons (Floating Fixed)
+   ================================ */
+.back-home {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #00ffaa 0%, #00b4d8 100%);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  outline: none;
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.4);
+  animation: floatHome 3s ease-in-out infinite alternate, neonPulse 2s infinite;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.back-home::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00ffaa, #00b4d8, #00ffaa);
+  z-index: -1;
+  filter: blur(6px);
+  opacity: 0.7;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.back-home:hover {
+  transform: scale(1.1) rotate(15deg);
+  background: linear-gradient(135deg, #00b4d8 0%, #00ffaa 100%);
+  box-shadow: 0 0 25px rgba(0, 255, 170, 0.8), 0 0 40px rgba(0, 180, 216, 0.5);
+  animation: floatHome 3s ease-in-out infinite alternate;
+}
+
+.back-home:hover::before {
+  opacity: 1;
+  filter: blur(8px);
+}
+
+.back-home:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  outline: none;
+  box-shadow: 0 0 15px rgba(251, 133, 0, 0.5);
+  animation: floatHome 3s ease-in-out infinite alternate, sunPulse 2s infinite;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-toggle-btn::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb703, #fb8500, #ffb703);
+  z-index: -1;
+  filter: blur(6px);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1) rotate(-15deg);
+  background: linear-gradient(135deg, #fb8500 0%, #ffb703 100%);
+  box-shadow: 0 0 25px rgba(251, 133, 0, 0.85), 0 0 40px rgba(255, 183, 3, 0.5);
+  animation: floatHome 3s ease-in-out infinite alternate;
+}
+
+.theme-toggle-btn:hover::before {
+  opacity: 1;
+  filter: blur(8px);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Animations for controls */
+@keyframes floatHome {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-6px); }
+}
+
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 10px rgba(0, 255, 170, 0.35), 0 0 15px rgba(0, 180, 216, 0.15); }
+  50% { box-shadow: 0 0 25px rgba(0, 255, 170, 0.8), 0 0 35px rgba(0, 180, 216, 0.5); }
+  100% { box-shadow: 0 0 10px rgba(0, 255, 170, 0.35), 0 0 15px rgba(0, 180, 216, 0.15); }
+}
+
+@keyframes sunPulse {
+  0% { box-shadow: 0 0 10px rgba(251, 133, 0, 0.35), 0 0 15px rgba(255, 183, 3, 0.15); }
+  50% { box-shadow: 0 0 25px rgba(251, 133, 0, 0.8), 0 0 35px rgba(255, 183, 3, 0.5); }
+  100% { box-shadow: 0 0 10px rgba(251, 133, 0, 0.35), 0 0 15px rgba(255, 183, 3, 0.15); }
+}
+
+@keyframes moonPulse {
+  0% { box-shadow: 0 0 10px rgba(94, 96, 206, 0.35), 0 0 15px rgba(72, 202, 228, 0.15); }
+  50% { box-shadow: 0 0 25px rgba(94, 96, 206, 0.8), 0 0 35px rgba(72, 202, 228, 0.5); }
+  100% { box-shadow: 0 0 10px rgba(94, 96, 206, 0.35), 0 0 15px rgba(72, 202, 228, 0.15); }
+}
+
+/* ================================
+   Status & Error Messages
+   ================================ */
+.error {
+  font-size: 1rem;
+  margin-top: 1rem;
+  padding: 10px 18px;
+  background: rgba(255, 80, 80, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  border-radius: 10px;
+  color: #ffdede;
+  font-weight: 600;
+  max-width: 440px;
+}
+
+/* ================================
+   Responsive Styles
+   ================================ */
+@media (max-width: 1100px) {
+  .left-panel {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .left-panel .weather-card,
+  .left-panel .map-card {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .agri-card, .crop-detail-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 840px) {
+  .weather-content {
+    padding: 3.5rem 1rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .main-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .temp {
+    font-size: 3.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .temp {
+    font-size: 3rem;
+  }
+  .search-bar input {
+    font-size: 0.9rem;
+    padding: 12px 16px;
+  }
+  .search-bar button {
+    font-size: 0.9rem;
+    padding: 12px 20px;
+    width: 100%;
+  }
+  .controls-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .select-wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .radius-info-banner {
+    flex-direction: column;
+    text-align: center;
+    border-radius: 20px;
+  }
+  .weather-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   ☀️ Light Theme Overrides
+   ========================================================================== */
+.light-theme {
+  background-color: #f0f7f4;
+  color: #1a3c22;
+}
+
+/* Frosted glass white overlay in Light Mode */
+.light-theme .overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.82) 100%
+  );
+}
+
+/* Light Theme Title style (Dark Forest Green with clean shadows) */
+.light-theme .title {
+  background: linear-gradient(120deg, #0f3d1e 30%, #00965e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .header-subtitle {
+  color: #1b4d32;
+}
+
+/* Light Theme Search input */
+.light-theme .search-bar input {
+  background: rgba(255, 255, 255, 0.85);
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .search-bar input::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.light-theme .search-bar input:focus {
+  background: #ffffff;
+  border-color: #00aa66;
+  box-shadow: 0 0 10px rgba(0, 170, 102, 0.18);
+}
+
+/* Controls */
+.light-theme .select-wrapper {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .select-label {
+  color: #0c3022;
+}
+
+.light-theme .soil-select {
+  background: #ffffff;
+  color: #222;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.light-theme .info-banner {
+  background: rgba(0, 150, 80, 0.08);
+  border-color: rgba(0, 150, 80, 0.3);
+  color: #0b3c1b;
+  box-shadow: 0 4px 15px rgba(0, 150, 80, 0.06);
+}
+
+/* 5km range banner light mode */
+.light-theme .radius-info-banner {
+  background: rgba(0, 150, 80, 0.06);
+  border-color: rgba(0, 150, 80, 0.25);
+  color: #0b3c1b;
+  box-shadow: 0 4px 15px rgba(0, 150, 80, 0.05);
+}
+
+.light-theme .pulse-dot {
+  background: #00aa66;
+  box-shadow: 0 0 8px #00aa66;
+  animation: pulseDotLight 1.5s infinite;
+}
+
+.light-theme .radius-info-banner code {
+  background: rgba(0, 0, 0, 0.05);
+  color: #007744;
+}
+
+@keyframes pulseDotLight {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(0, 170, 102, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(0, 170, 102, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(0, 170, 102, 0);
+  }
+}
+
+/* Card structures in Light Mode */
+.light-theme .weather-card,
+.light-theme .map-card,
+.light-theme .agri-card,
+.light-theme .crop-detail-card {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #222;
+  box-shadow: 0 12px 35px rgba(0, 80, 40, 0.06);
+}
+
+.light-theme .weather-card h2,
+.light-theme .map-card h2,
+.light-theme .agri-card h2,
+.light-theme .crop-detail-card h2 {
+  color: #0f3d1e;
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Weather parameters */
+.light-theme .temp {
+  color: #0c3022;
+  text-shadow: 0 4px 12px rgba(0, 80, 40, 0.1);
+}
+
+.light-theme .weather-season-badge {
+  background: rgba(0, 150, 80, 0.08);
+  border-color: rgba(0, 150, 80, 0.3);
+  color: #007744;
+}
+
+/* Weather stats grid light mode */
+.light-theme .stat-block {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .stat-block:hover {
+  background: rgba(0, 150, 80, 0.05);
+  border-color: rgba(0, 150, 80, 0.2);
+}
+
+.light-theme .stat-label {
+  color: #007755;
+}
+
+.light-theme .stat-value {
+  color: #111;
+}
+
+/* Map details */
+.light-theme .coords-display {
+  background: rgba(0, 0, 0, 0.05);
+  color: #0f3d1e;
+}
+
+/* Grid & Items */
+.light-theme .grid-helper {
+  color: #007744;
+}
+
+.light-theme .crop-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.light-theme .crop-item p {
+  color: #0f3d1e;
+}
+
+.light-theme .crop-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Active crop item light theme styling */
+.light-theme .crop-item.active-crop {
+  background: rgba(0, 200, 100, 0.08);
+  border-color: #00aa66;
+  box-shadow: 0 0 15px rgba(0, 170, 102, 0.25);
+}
+
+.light-theme .crop-item.active-crop p {
+  color: #00aa66;
+}
+
+/* Agri Tips & Advisories */
+.light-theme .agri-tips {
+  background: rgba(0, 0, 0, 0.03);
+  border-left-color: #00aa66;
+}
+
+.light-theme .agri-tips strong {
+  color: #009955;
+}
+
+.light-theme .agri-tips p {
+  color: #2e4d3a;
+}
+
+/* Crop details list and boxes */
+.light-theme .detail-item.desc {
+  background: rgba(0, 0, 0, 0.02);
+  border-left-color: #0077b6;
+}
+
+.light-theme .detail-item.desc p {
+  color: #333;
+}
+
+.light-theme .detail-box {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .detail-box:hover {
+  background: rgba(0, 150, 80, 0.05);
+  border-color: rgba(0, 150, 80, 0.2);
+}
+
+.light-theme .detail-box .icon {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.light-theme .detail-box .label {
+  color: #007755;
+}
+
+.light-theme .detail-box .value {
+  color: #111;
+}
+
+.light-theme .detail-item.tips {
+  background: rgba(0, 200, 100, 0.05);
+  border-color: rgba(0, 200, 100, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 170, 102, 0.04);
+}
+
+.light-theme .detail-item.tips strong {
+  color: #007755;
+}
+
+.light-theme .detail-item.tips p {
+  color: #1e3f34;
+}
+
+/* Theme Toggle Button custom light theme style */
+.light-theme .theme-toggle-btn {
+  background: linear-gradient(135deg, #5e60ce 0%, #48cae4 100%);
+  box-shadow: 0 0 15px rgba(94, 96, 206, 0.4);
+  animation: floatHome 3s ease-in-out infinite alternate, moonPulse 2s infinite;
+}
+
+.light-theme .theme-toggle-btn::before {
+  background: linear-gradient(135deg, #5e60ce, #48cae4, #5e60ce);
+}
+
+.light-theme .theme-toggle-btn:hover {
+  background: linear-gradient(135deg, #48cae4 0%, #5e60ce 100%);
+  box-shadow: 0 0 25px rgba(94, 96, 206, 0.7), 0 0 40px rgba(72, 202, 228, 0.4);
+}
+
+/* ==========================================================================
+   🌦 Weather page loader & prompt container
+   ========================================================================== */
+.weather-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 2.5rem auto;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.weather-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(0, 255, 170, 0.1);
+  border-top-color: #00ffaa;
+  border-radius: 50%;
+  animation: spinLoader 1s linear infinite;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.2);
+}
+
+.weather-loading-container p {
+  font-size: 1.1rem;
+  color: #a6ffc2;
+  font-weight: 500;
+  margin: 0;
+}
+
+.weather-prompt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 2.5rem auto;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.weather-prompt-container .prompt-icon {
+  font-size: 3rem;
+  margin-bottom: 1.25rem;
+  animation: promptFloat 2s ease-in-out infinite alternate;
+}
+
+.weather-prompt-container p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #8fa095;
+  margin: 0;
+  max-width: 450px;
+}
+
+@keyframes spinLoader {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes promptFloat {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+/* Light theme overrides */
+.light-theme .weather-loading-container,
+.light-theme .weather-prompt-container {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 80, 40, 0.04);
+}
+
+.light-theme .weather-loading-container p {
+  color: #0c3022;
+}
+
+.light-theme .weather-prompt-container p {
+  color: #4a5d50;
+}
